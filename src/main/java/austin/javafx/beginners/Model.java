@@ -10,6 +10,7 @@ public class Model {
     private final IntegerProperty birthday = new SimpleIntegerProperty(0);
     private final IntegerProperty id = new SimpleIntegerProperty(0);
     private final StringProperty descriptor = new SimpleStringProperty("");
+    private final StringProperty nameSearch = new SimpleStringProperty("");
 
     public String getName() {
         return name.get();
@@ -57,6 +58,18 @@ public class Model {
 
     public StringProperty getDescriptorProperty() {
         return descriptor;
+    }
+
+    public String getNameSearch() {
+        return nameSearch.get();
+    }
+
+    public void setNameSearch(String newNameSearch) {
+        nameSearch.set(newNameSearch);
+    }
+
+    public StringProperty getNameSearchProperty() {
+        return nameSearch;
     }
 
 }

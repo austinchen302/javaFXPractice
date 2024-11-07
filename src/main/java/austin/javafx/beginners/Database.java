@@ -5,12 +5,16 @@ import java.util.Map;
 
 public class Database {
 
-    private HashMap<Integer, Map<String, String>> database;
+    private Map<Integer, Map<String, String>> database = new HashMap<>();
+    private int id = 0;
 
-    public void saveCow(Map<Integer, Map<String, String>> cowRecord) {
-        for (Integer id : cowRecord.keySet()) {
-            database.put(id, cowRecord.get(id));
-        }
+    public int saveCow(Map<String, String> cowRecord) {
+        database.put(id, cowRecord);
+        return id++;
+    }
+
+    public Map<String, String> getCow(int id) {
+        return database.get(id);
     }
 
     public Map<Integer, Map<String, String>> getData() {

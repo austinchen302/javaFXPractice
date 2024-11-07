@@ -10,11 +10,13 @@ public class Broker {
         dao.saveCow(createCowRecord(cow));
     }
 
-    private Map<Integer, Map<String, String>> createCowRecord(Cow cow) {
-        HashMap<Integer, Map<String, String>> ret = new HashMap<>();
-        HashMap<String, String> record = new HashMap<>();
-        record.put(cow.getName(), cow.getDescriptor());
-        ret.put(cow.getID(), record);
+    private Map<String, String> createCowRecord(Cow cow) {
+        HashMap<String, String> ret = new HashMap<>();
+        ret.put(cow.getName(), cow.getDescriptor());
         return ret;
+    }
+
+    public Map<String, String> getCow(int id) {
+        return dao.getCow(id);
     }
 }

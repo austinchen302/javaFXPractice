@@ -4,6 +4,8 @@ import javafx.concurrent.Task;
 import javafx.scene.layout.Region;
 import javafx.util.Builder;
 
+import java.util.Map;
+
 public class Controller {
     private Builder<Region> viewBuilder;
     private Interactor interactor;
@@ -11,21 +13,18 @@ public class Controller {
     public Controller() {
         Model model = new Model();
         interactor = new Interactor(model);
-        viewBuilder = new View(model, this::saveCow);
+        viewBuilder = new View(model, this::saveCow, this::getCow);
     }
 
     public void saveCow() {
-        Task<Void> saveTask = new Task<>() {
-            protected Void call() throws Exception {
-                if (isCancelled()) {
-                    return null;
-                }
-                interactor.saveCow();
-                return null;
-            }
-        };
-        Thread saveThread = new Thread(saveTask);
-        saveThread.start();
+        interactor.saveCow();
+    }
+
+    public void getCow() {
+        Map<String, String> cowRecord = interactor.getCow();
+        for (String name : cowRecord.keySet()) {
+            System.out.println("Name: " + name + " Description: " + cowRecord.get(name));
+        }
     }
 
     public Region getView() {

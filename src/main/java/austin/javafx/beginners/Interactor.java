@@ -14,21 +14,23 @@ public class Interactor {
     }
 
     public void saveCow() {
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         broker.saveCow(createCowFromModel());
         System.out.println("Cow Name: " + model.getName() + " Description: " + model.getDescriptor());
+    }
+
+    public Map<String, String> getCow() {
+        return broker.getCow(getIDFromModel());
     }
 
     private Cow createCowFromModel() {
         Cow cow = new Cow();
         cow.setName(model.getName());
-        cow.setID(model.getID());
         cow.setDescriptor(model.getDescriptor());
         return cow;
+    }
+
+    private int getIDFromModel() {
+        return model.getID();
     }
 
 }

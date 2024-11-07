@@ -16,24 +16,26 @@ import java.util.Objects;
 public class View implements Builder<Region> {
     private final Model model;
     private final Runnable saveHandler;
+    private final Runnable retrieveHandler;
 
-    public View(Model model, Runnable saveHandler) {
+    public View(Model model, Runnable saveHandler, Runnable retrieveHandler) {
         this.model = model;
         this.saveHandler = saveHandler;
+        this.retrieveHandler = retrieveHandler;
     }
 
     @Override
     public Region build() {
         BorderPane results = new BorderPane();
         results.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("/css/style.css")).toExternalForm());
-        results.setTop(headingLabel("Customer Information"));
-        results.setCenter(createCentre());
-        results.setBottom(createButtons());
+        results.setTop(headingLabel("Cow Information"));
+        results.setCenter(createSaveField());
+        results.setBottom(createRetriveField());
         return results;
     }
 
-    private Node createCentre() {
-        VBox results = new VBox(6, idBox(), nameBox(), descriptorBox());
+    private Node createSaveField() {
+        VBox results = new VBox(6, idBox(), nameBox(), descriptorBox(), saveButton());
         results.setPadding(new Insets(20));
         return results;
     }
@@ -56,12 +58,32 @@ public class View implements Builder<Region> {
         return ret;
     }
 
-    private Node createButtons() {
+    private Node saveButton() {
         Button saveButton = new Button("Save");
         saveButton.setOnAction(evt -> saveHandler.run());
         HBox results = new HBox(10, saveButton);
         results.setAlignment(Pos.CENTER_RIGHT);
         return results;
+    }
+
+    private Node createRetriveField() {
+        VBox ret = new VBox(6, searchBox(), searchButton());
+        ret.setPadding(new Insets(20));
+        return ret;
+    }
+
+    private Node searchBox() {
+        VBox ret = new VBox(6, promptLabel("Search"), boundTextField(model.getNameSearchProperty()));
+        ret.setAlignment(Pos.CENTER_LEFT);
+        return ret;
+    }
+
+    private Node searchButton() {
+        Button searchButton = new Button("Search");
+        searchButton.setOnAction(evt -> retrieveHandler.run());
+        HBox ret = new HBox(10, searchButton);
+        ret.setAlignment(Pos.CENTER_RIGHT);
+        return ret;
     }
 
     private Node boundIntegerField(IntegerProperty property) {

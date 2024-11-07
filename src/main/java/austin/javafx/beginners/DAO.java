@@ -7,8 +7,12 @@ public class DAO {
 
     static Database db = new Database();
 
-    public void saveCow(Map<Integer, Map<String, String>> cowRecord) {
+    public void saveCow(Map<String, String> cowRecord) {
         db.saveCow(cowRecord);
+    }
+
+    public Map<String, String> getCow(int id) {
+        return db.getCow(id);
     }
 
 
