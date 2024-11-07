@@ -11,8 +11,8 @@ public class DAO {
         db.saveCow(cowRecord);
     }
 
-    public Map<String, String> getCow(int id) {
-        return db.getCow(id);
+    public Map<String, String> getCow(String name) {
+        return db.getCow(name);
     }
 
 

@@ -16,7 +16,7 @@ public class Broker {
         return ret;
     }
 
-    public Map<String, String> getCow(int id) {
-        return dao.getCow(id);
+    public Map<String, String> getCow(String name) {
+        return dao.getCow(name);
     }
 }

@@ -19,7 +19,7 @@ public class Interactor {
     }
 
     public Map<String, String> getCow() {
-        return broker.getCow(getIDFromModel());
+        return broker.getCow(getSearchFromModel());
     }
 
     private Cow createCowFromModel() {
@@ -29,8 +29,8 @@ public class Interactor {
         return cow;
     }
 
-    private int getIDFromModel() {
-        return model.getID();
+    private String getSearchFromModel() {
+        return model.getNameSearch();
     }
 
 }

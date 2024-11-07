@@ -13,8 +13,13 @@ public class Database {
         return id++;
     }
 
-    public Map<String, String> getCow(int id) {
-        return database.get(id);
+    public Map<String, String> getCow(String name) {
+        for (Map<String, String> cow : database.values()) {
+            if (cow.containsKey(name)) {
+                return cow;
+            }
+        }
+        return null;
     }
 
     public Map<Integer, Map<String, String>> getData() {

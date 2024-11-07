@@ -22,9 +22,14 @@ public class Controller {
 
     public void getCow() {
         Map<String, String> cowRecord = interactor.getCow();
-        for (String name : cowRecord.keySet()) {
-            System.out.println("Name: " + name + " Description: " + cowRecord.get(name));
+        try {
+            for (String name : cowRecord.keySet()) {
+                System.out.println("Name: " + name + " Description: " + cowRecord.get(name));
+            }
+        } catch (NullPointerException e) {
+            System.out.println("No cow found");
         }
+
     }
 
     public Region getView() {

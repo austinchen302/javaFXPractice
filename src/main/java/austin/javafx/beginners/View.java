@@ -35,15 +35,9 @@ public class View implements Builder<Region> {
     }
 
     private Node createSaveField() {
-        VBox results = new VBox(6, idBox(), nameBox(), descriptorBox(), saveButton());
+        VBox results = new VBox(6, nameBox(), descriptorBox(), saveButton());
         results.setPadding(new Insets(20));
         return results;
-    }
-
-    private Node idBox() {
-        VBox ret = new VBox(6,promptLabel("ID:"), boundIntegerField(model.getIDProperty()));
-        ret.setAlignment(Pos.CENTER_LEFT);
-        return ret;
     }
 
     private Node nameBox() {
